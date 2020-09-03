@@ -1,0 +1,34 @@
+<?php
+  require_once "../model/db.php";
+  class Nhom {
+
+    public static function insert($data){
+      $sql = "INSERT INTO public.nhom(id, name) VALUES (?, ?);";
+      return DB::executeUpdate($sql, [
+        $data["id"], $data["name"]
+      ]);
+    }
+
+    public static function update($data){
+      $sql = "UPDATE public.nhom SET name=? WHERE id=?;";
+      return DB::executeUpdate($sql, [
+        $data["name"], $data["id"]
+      ]);
+    }
+
+    public static function delete($id){
+      $sql = "DELETE FROM public.nhom WHERE id=?;";
+      return DB::executeUpdate($sql, [$id]);
+    }
+
+    public static function getAll(){
+      $sql = "SELECT id, name FROM nhom";
+      return DB::executeQuery($sql, []);
+    }
+
+    public static function getOne($id){
+      $sql = "SELECT id, name FROM nhom WHERE id=?;";
+      return DB::executeQuery($sql, [$id])[0];
+    }
+  }
+?>
